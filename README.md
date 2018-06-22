@@ -1,2 +1,7 @@
 # AdminScripts
-Scripts that are very useful to the Windows system admin
+This is my collection of scripts and tools that I use on a monthly basis.  It is geared towards Windows system administrators.
+
+## Subject Matter
+* User account management - Creation, modification, deletion, and audit
+* Computer account management - Audit
+* Windows 10 - Updating computer build images with the lastest security updates
