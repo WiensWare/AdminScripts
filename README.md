@@ -5,3 +5,6 @@ This is my collection of scripts and tools that I use on a monthly basis.  It is
 * User account management - Creation, modification, deletion, and audit
 * Computer account management - Audit
 * Windows 10 - Updating computer build images with the lastest security updates
+
+## Scripts
+* CreateHomeDirectory.ps1 - Creates a user's network-based home directory on a remote server.
