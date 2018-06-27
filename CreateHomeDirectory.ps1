@@ -5,6 +5,9 @@
 ###    1. Create the Directory
 ###    2. Change the permissions and ownership of the directory
 
+# Turn on verbose so we can see some output.
+$VerbosePreference = 'Continue'
+
 # Read configuration from CSV file (expected to be in same directory as this script)
 $Config = Import-Csv "$PSScriptRoot\CreateHomeDirectory.csv"
 
@@ -26,7 +29,7 @@ $FullDirPath = "$ServerPath\$Username"
 
 # Validate the username by attemping to read it from the active directory
 Write-Verbose "Validating that $Domain\$Username exists in the active directory"
-$User = Get-ADUser -Identity "$Domain\$Username"
+$User = Get-ADUser -Identity "$Username"
 if ($User-eq $null) 
 {
     Write-Error "User $Username doesn't exist in the active directory.  No directory created."
@@ -40,19 +43,18 @@ if (Test-Path $FullDirPath)
 
 # Attempt to create the directory
 Write-Verbose "Attempting to create $FullDirPath for $Domain\$Username"
-New-Item -Path $FullDirPath -ItemType Directory -Confirm -ErrorAction Stop
+New-Item -Path $FullDirPath -ItemType Directory -Confirm
 
 # Create an acess rule
 $FileSystemAccessRights = [System.Security.AccessControl.FileSystemRights]::FullControl
 $InheritanceFlags = [System.Security.AccessControl.InheritanceFlags]::"ContainerInherit", "ObjectInherit"
 $PropagationFlags = [System.Security.AccessControl.PropagationFlags]::None
 $AccessControl =[System.Security.AccessControl.AccessControlType]::Allow
-$NewAccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($User, $FileSystemAccessRights, $InheritanceFlags, $PropagationFlags, $AccessControl)
+$NewAccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($Username, $FileSystemAccessRights, $InheritanceFlags, $PropagationFlags, $AccessControl)
 
 # Get current ACL on directory, modify it, and write it back
 $CurrentACL = Get-ACL -path $FullDirPath
 $CurrentACL.SetAccessRule($NewAccessrule)
-$CurrentACL.SetOwner($User)
 Set-ACL -path $FullDirPath -AclObject $currentACL
 
 # Notify user everything is done
