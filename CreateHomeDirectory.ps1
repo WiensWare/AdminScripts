@@ -8,14 +8,8 @@
 # Turn on verbose so we can see some output.
 $VerbosePreference = 'Continue'
 
-# Read configuration from CSV file (expected to be in same directory as this script)
-$Config = Import-Csv "$PSScriptRoot\CreateHomeDirectory.csv"
-
-# Path to use when creating a home directory.  *** CUSTOMIZE FOR YOUR NEEDS IF NOT USING CSV FILE ***
-$ServerPath = $Config.ServerPath
-
-# Domain to search for username in.  *** CUSTOMIZE FOR YOUR NEEDS IF NOT USING CSV FILE ***
-$Domain = $Config.Domain
+# Path to use when creating a home directory.  *** CUSTOMIZE FOR YOUR NEEDS ***
+$ServerPath = "arscapar3fp2"
 
 # Ask for the username of the directory be created
 $Username = Read-Host -Prompt "Please enter the user name in the format first.last"
@@ -28,7 +22,7 @@ $Username = (Get-Culture).TextInfo.ToTitleCase($Username)
 $FullDirPath = "$ServerPath\$Username"
 
 # Validate the username by attemping to read it from the active directory
-Write-Verbose "Validating that $Domain\$Username exists in the active directory"
+Write-Verbose "Validating that $Username exists in the active directory"
 $User = Get-ADUser -Identity "$Username"
 if ($User-eq $null) 
 {
@@ -42,7 +36,7 @@ if (Test-Path $FullDirPath)
 }
 
 # Attempt to create the directory
-Write-Verbose "Attempting to create $FullDirPath for $Domain\$Username"
+Write-Verbose "Attempting to create $FullDirPath for $Username"
 New-Item -Path $FullDirPath -ItemType Directory -Confirm
 
 # Create an acess rule
