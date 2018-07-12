@@ -9,7 +9,7 @@
 $VerbosePreference = 'Continue'
 
 # Path to use when creating a home directory.  *** CUSTOMIZE FOR YOUR NEEDS ***
-$ServerPath = "arscapar3fp2"
+$ServerPath = "\\arscapar3fp2"
 
 # Ask for the username of the directory be created
 $Username = Read-Host -Prompt "Please enter the user name in the format first.last"
@@ -19,7 +19,7 @@ $Username = Read-Host -Prompt "Please enter the user name in the format first.la
 $Username = (Get-Culture).TextInfo.ToTitleCase($Username)
 
 # Create the full directory path
-$FullDirPath = "$ServerPath\$Username"
+$FullDirPath = "$ServerPath\Homes\$Username"
 
 # Validate the username by attemping to read it from the active directory
 Write-Verbose "Validating that $Username exists in the active directory"
