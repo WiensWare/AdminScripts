@@ -13,3 +13,4 @@ This is my collection of scripts and tools that I use on a monthly basis.  It is
 * UserReport.ps1 - Creates CSV of user account info.  Useful for auditing inactive accounts.
 * Invoke-USMT.ps1 - Remotely runs USMT (User State Migrtion Tool) on a source and destination computer.
 * Find-BigOldFiles.ps1 - Generates a report on large and old files.  (i.e. the ones that need to be cleaned up!)
+* GetPathSize.ps1 - Generates a spreadsheet of specified directories and sizes
