@@ -15,3 +15,4 @@ This is my collection of scripts and tools that I use on a monthly basis.  It is
 * Find-BigOldFiles.ps1 - Generates a report on large and old files.  (i.e. the ones that need to be cleaned up!)
 * GetPathSize.ps1 - Generates a spreadsheet of specified directories and sizes
 * Update-Servers.ps1 - Applies Microsoft patches to a group of servers and schedules a reboot
+* Update-Computer.ps1 - Applies Microsoft patches to local computer and reboots
